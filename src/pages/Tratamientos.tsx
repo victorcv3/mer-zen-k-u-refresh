@@ -1,6 +1,8 @@
 import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/Section";
 import { ServiceCard } from "@/components/ServiceCard";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import massageImage from "@/assets/massage-treatment.jpg";
 
 const tratamientos = [
   {
@@ -84,52 +86,65 @@ const Tratamientos = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-gradient-hero py-16 md:py-24">
-        <div className="content-container text-center">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
-            Tratamientos
-          </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
-            Descubre nuestra carta de tratamientos corporales y energéticos. 
-            Cada sesión está diseñada para ofrecerte bienestar y relajación profunda.
-          </p>
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${massageImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+        <div className="relative content-container text-center z-10">
+          <AnimatedSection animation="fade-up">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
+              Tratamientos
+            </h1>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+              Descubre nuestra carta de tratamientos corporales y energéticos. 
+              Cada sesión está diseñada para ofrecerte bienestar y relajación profunda.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Tratamientos */}
       <Section>
-        <SectionHeader 
-          title="Masajes y Terapias" 
-          subtitle="Elige el tratamiento que mejor se adapte a tus necesidades"
-        />
+        <AnimatedSection animation="fade-up">
+          <SectionHeader 
+            title="Masajes y Terapias" 
+            subtitle="Elige el tratamiento que mejor se adapte a tus necesidades"
+          />
+        </AnimatedSection>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {tratamientos.map((tratamiento, index) => (
-            <ServiceCard
-              key={index}
-              title={tratamiento.title}
-              description={tratamiento.description}
-              duration={tratamiento.duration}
-              price={tratamiento.price}
-            />
+            <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+              <ServiceCard
+                title={tratamiento.title}
+                description={tratamiento.description}
+                duration={tratamiento.duration}
+                price={tratamiento.price}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </Section>
 
       {/* Toppings */}
       <Section className="bg-secondary/30">
-        <SectionHeader 
-          title="Toppings" 
-          subtitle="Complementa tu tratamiento con estos extras"
-        />
+        <AnimatedSection animation="fade-up">
+          <SectionHeader 
+            title="Toppings" 
+            subtitle="Complementa tu tratamiento con estos extras"
+          />
+        </AnimatedSection>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {toppings.map((topping, index) => (
-            <ServiceCard
-              key={index}
-              title={topping.title}
-              description={topping.description}
-              duration={topping.duration}
-              price={topping.price}
-            />
+            <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+              <ServiceCard
+                title={topping.title}
+                description={topping.description}
+                duration={topping.duration}
+                price={topping.price}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </Section>
