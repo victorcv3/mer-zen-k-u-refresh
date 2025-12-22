@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/Section";
 import { ProductCard } from "@/components/ProductCard";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import productsImage from "@/assets/skincare-products.jpg";
 
 const productos = [
   {
@@ -57,52 +62,70 @@ const Producto = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-gradient-hero py-16 md:py-24">
-        <div className="content-container text-center">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
-            Productos
-          </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
-            Selección de productos de alta calidad para continuar tu rutina de cuidado en casa. 
-            Los mismos que utilizamos en nuestros tratamientos profesionales.
-          </p>
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${productsImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+        <div className="relative content-container text-center z-10">
+          <AnimatedSection animation="fade-up">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
+              Productos
+            </h1>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+              Selección de productos de alta calidad para continuar tu rutina de cuidado en casa. 
+              Los mismos que utilizamos en nuestros tratamientos profesionales.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Productos */}
       <Section>
-        <SectionHeader 
-          title="Nuestro Catálogo" 
-          subtitle="Productos seleccionados para tu bienestar"
-        />
+        <AnimatedSection animation="fade-up">
+          <SectionHeader 
+            title="Nuestro Catálogo" 
+            subtitle="Productos seleccionados para tu bienestar"
+          />
+        </AnimatedSection>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {productos.map((producto, index) => (
-            <ProductCard
-              key={index}
-              title={producto.title}
-              description={producto.description}
-              price={producto.price}
-              stock={producto.stock}
-            />
+            <AnimatedSection key={index} animation="fade-up" delay={index * 50}>
+              <ProductCard
+                title={producto.title}
+                description={producto.description}
+                price={producto.price}
+                stock={producto.stock}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </Section>
 
       {/* Info */}
       <Section className="bg-secondary/30">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-serif text-2xl md:text-3xl font-medium text-foreground mb-4">
-            ¿Interesada en algún producto?
-          </h2>
-          <p className="text-muted-foreground text-lg mb-6">
-            Todos nuestros productos están disponibles en el centro. También podemos 
-            asesorarte sobre qué productos son los más adecuados para tu tipo de piel 
-            y tus necesidades específicas.
-          </p>
-          <p className="text-muted-foreground">
-            Consulta disponibilidad y reserva tus productos contactando con nosotros.
-          </p>
-        </div>
+        <AnimatedSection animation="scale">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-2xl md:text-3xl font-medium text-foreground mb-4">
+              ¿Interesada en algún producto?
+            </h2>
+            <p className="text-muted-foreground text-lg mb-6">
+              Todos nuestros productos están disponibles en el centro. También podemos 
+              asesorarte sobre qué productos son los más adecuados para tu tipo de piel 
+              y tus necesidades específicas.
+            </p>
+            <p className="text-muted-foreground mb-8">
+              Consulta disponibilidad y reserva tus productos contactando con nosotros.
+            </p>
+            <Button asChild size="lg">
+              <Link to="/contacto">
+                Contactar
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        </AnimatedSection>
       </Section>
     </Layout>
   );

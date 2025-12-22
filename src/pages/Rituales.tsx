@@ -1,7 +1,10 @@
 import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/Section";
 import { ServiceCard } from "@/components/ServiceCard";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { Sparkles, Heart, Leaf, Droplets } from "lucide-react";
+import ritualImage from "@/assets/wellness-ritual.jpg";
+import reikiImage from "@/assets/reiki-healing.jpg";
 
 const rituales = [
   {
@@ -90,77 +93,122 @@ const Rituales = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-gradient-hero py-16 md:py-24">
-        <div className="content-container text-center">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
-            Rituales
-          </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
-            Experiencias únicas de bienestar que combinan técnicas ancestrales 
-            con el arte del cuidado personal. Más que tratamientos, son viajes sensoriales.
-          </p>
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${ritualImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+        <div className="relative content-container text-center z-10">
+          <AnimatedSection animation="fade-up">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
+              Rituales
+            </h1>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+              Experiencias únicas de bienestar que combinan técnicas ancestrales 
+              con el arte del cuidado personal. Más que tratamientos, son viajes sensoriales.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Rituales */}
       <Section>
-        <SectionHeader 
-          title="Nuestros Rituales" 
-          subtitle="Experiencias transformadoras para cuerpo y alma"
-        />
+        <AnimatedSection animation="fade-up">
+          <SectionHeader 
+            title="Nuestros Rituales" 
+            subtitle="Experiencias transformadoras para cuerpo y alma"
+          />
+        </AnimatedSection>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {rituales.map((ritual, index) => (
-            <ServiceCard
-              key={index}
-              title={ritual.title}
-              description={ritual.description}
-              duration={ritual.duration}
-              price={ritual.price}
-            />
+            <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+              <ServiceCard
+                title={ritual.title}
+                description={ritual.description}
+                duration={ritual.duration}
+                price={ritual.price}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </Section>
 
-      {/* Beneficios */}
+      {/* Reiki Feature */}
       <Section className="bg-secondary/30">
-        <SectionHeader 
-          title="Beneficios de Nuestros Rituales" 
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {beneficios.map((beneficio, index) => (
-            <div 
-              key={index}
-              className="bg-card rounded-xl p-6 shadow-soft border border-border/50 text-center hover-lift"
-            >
-              <div className="p-4 rounded-xl bg-primary/10 text-primary w-fit mx-auto mb-4">
-                <beneficio.icon className="h-8 w-8" />
-              </div>
-              <h3 className="font-serif text-lg font-medium text-foreground mb-2">
-                {beneficio.title}
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                {beneficio.description}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <AnimatedSection animation="fade-right">
+            <div className="rounded-2xl overflow-hidden shadow-soft">
+              <img 
+                src={reikiImage} 
+                alt="Terapia Reiki" 
+                className="w-full h-[400px] object-cover"
+              />
+            </div>
+          </AnimatedSection>
+          <AnimatedSection animation="fade-left" delay={200}>
+            <div>
+              <h2 className="font-serif text-3xl md:text-4xl font-medium text-foreground mb-4">
+                Terapia Reiki
+              </h2>
+              <p className="text-muted-foreground text-lg mb-4">
+                El Reiki es una técnica de sanación energética que canaliza la energía universal 
+                a través de las manos del terapeuta hacia el receptor.
+              </p>
+              <p className="text-muted-foreground">
+                Esta terapia milenaria japonesa ayuda a equilibrar los chakras, reducir el estrés, 
+                aliviar el dolor y promover la sanación natural del cuerpo. Una experiencia 
+                profundamente relajante y restauradora.
               </p>
             </div>
+          </AnimatedSection>
+        </div>
+      </Section>
+
+      {/* Beneficios */}
+      <Section>
+        <AnimatedSection animation="fade-up">
+          <SectionHeader 
+            title="Beneficios de Nuestros Rituales" 
+          />
+        </AnimatedSection>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {beneficios.map((beneficio, index) => (
+            <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+              <div className="bg-card rounded-xl p-6 shadow-soft border border-border/50 text-center hover-lift h-full">
+                <div className="p-4 rounded-xl bg-primary/10 text-primary w-fit mx-auto mb-4">
+                  <beneficio.icon className="h-8 w-8" />
+                </div>
+                <h3 className="font-serif text-lg font-medium text-foreground mb-2">
+                  {beneficio.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {beneficio.description}
+                </p>
+              </div>
+            </AnimatedSection>
           ))}
         </div>
       </Section>
 
       {/* Toppings */}
-      <Section>
-        <SectionHeader 
-          title="Toppings para Rituales" 
-          subtitle="Personaliza tu experiencia con estos extras"
-        />
+      <Section className="bg-secondary/30">
+        <AnimatedSection animation="fade-up">
+          <SectionHeader 
+            title="Toppings para Rituales" 
+            subtitle="Personaliza tu experiencia con estos extras"
+          />
+        </AnimatedSection>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {toppingsRituales.map((topping, index) => (
-            <ServiceCard
-              key={index}
-              title={topping.title}
-              description={topping.description}
-              duration={topping.duration}
-              price={topping.price}
-            />
+            <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+              <ServiceCard
+                title={topping.title}
+                description={topping.description}
+                duration={topping.duration}
+                price={topping.price}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </Section>
