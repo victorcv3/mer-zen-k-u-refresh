@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { Section, SectionHeader } from "@/components/Section";
 import { InfoCard } from "@/components/InfoCard";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { Calendar, Clock, Gift, XCircle, AlertCircle } from "lucide-react";
 
 const normativas = [
@@ -64,58 +65,73 @@ const Normativa = () => {
       {/* Hero */}
       <section className="bg-gradient-hero py-16 md:py-24">
         <div className="content-container text-center">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
-            Normativa del Centro
-          </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
-            Para garantizar la mejor experiencia posible, te pedimos que tengas en cuenta 
-            las siguientes políticas de nuestro centro.
-          </p>
+          <AnimatedSection animation="fade-up">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
+              Normativa del Centro
+            </h1>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+              Para que tu experiencia sea perfecta, te pedimos que leas y respetes 
+              nuestras políticas y normas.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Normativas principales */}
+      {/* Normativas */}
       <Section>
-        <SectionHeader 
-          title="Políticas del Centro" 
-        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {normativas.map((normativa, index) => (
-            <InfoCard
-              key={index}
-              icon={normativa.icon}
-              title={normativa.title}
-              content={normativa.content}
-            />
+            <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+              <InfoCard
+                icon={normativa.icon}
+                title={normativa.title}
+                content={normativa.content}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </Section>
 
-      {/* Información adicional */}
+      {/* Información Adicional */}
       <Section className="bg-secondary/30">
+        <AnimatedSection animation="fade-up">
+          <SectionHeader 
+            title="Información Adicional" 
+            subtitle="Datos importantes a tener en cuenta"
+          />
+        </AnimatedSection>
         <div className="max-w-3xl mx-auto">
           {informacionAdicional.map((info, index) => (
-            <InfoCard
-              key={index}
-              icon={info.icon}
-              title={info.title}
-              content={info.content}
-            />
+            <AnimatedSection key={index} animation="fade-up" delay={100}>
+              <InfoCard
+                icon={info.icon}
+                title={info.title}
+                content={info.content}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </Section>
 
-      {/* Contacto */}
+      {/* Contact CTA */}
       <Section>
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="font-serif text-2xl md:text-3xl font-medium text-foreground mb-4">
-            ¿Tienes alguna duda?
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Si tienes cualquier pregunta sobre nuestras políticas o necesitas más información, 
-            no dudes en contactarnos. Estaremos encantados de ayudarte.
-          </p>
-        </div>
+        <AnimatedSection animation="scale">
+          <div className="text-center bg-card rounded-2xl p-8 md:p-12 shadow-soft border border-border/50">
+            <h2 className="font-serif text-2xl md:text-3xl font-medium text-foreground mb-4">
+              ¿Tienes alguna pregunta?
+            </h2>
+            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+              Si tienes dudas sobre nuestras políticas o necesitas información adicional, 
+              no dudes en contactarnos.
+            </p>
+            <a
+              href="/contacto"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-smooth"
+            >
+              Contactar
+            </a>
+          </div>
+        </AnimatedSection>
       </Section>
     </Layout>
   );
